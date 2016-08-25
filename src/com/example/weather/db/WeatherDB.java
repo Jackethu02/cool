@@ -12,6 +12,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+
 public class WeatherDB {
 	//database name
 	public static final String DB_NAME="weather";
@@ -21,7 +22,7 @@ public class WeatherDB {
 	private static WeatherDB weatherDB;
 	private SQLiteDatabase db;
 	
-	//controctor
+	//cons
 	private WeatherDB(Context context){
 		WeatherOpenHelper dbHelper = new WeatherOpenHelper(context, DB_NAME,null,VERSION);
 		db = dbHelper.getWritableDatabase();
@@ -50,13 +51,13 @@ public class WeatherDB {
 		List<Province>list = new ArrayList<Province>();
 		Cursor cursor = db.query("Province", null, null, null,  null, null, null);
 		if(cursor.moveToFirst()){
-			do{
+			while(cursor.moveToNext()){
 				Province province = new Province();
-				province.setId(cursor.getInt(cursor.getColumnIndex("Id")));
+				province.setId(cursor.getInt(cursor.getColumnIndex("id")));
 				province.setProvinceName(cursor.getString(cursor.getColumnIndex("province_name")));
 				province.setProvinceCode(cursor.getString(cursor.getColumnIndex("province_code")));
 				list.add(province);
-			}while(cursor.moveToNext());
+			}
 		}
 		return list;
 	}
@@ -80,14 +81,14 @@ public class WeatherDB {
 		Cursor cursor = db.query("City", null, "province_id = ?",
 				new String[]{String.valueOf(provinceId)},  null, null, null);
 		if(cursor.moveToFirst()){
-			do{
+			while(cursor.moveToNext()){
 				City city = new City();
-				city.setId(cursor.getInt(cursor.getColumnIndex("Id")));
+				city.setId(cursor.getInt(cursor.getColumnIndex("id")));
 				city.setCityName(cursor.getString(cursor.getColumnIndex("city_name")));
 				city.setCityCode(cursor.getString(cursor.getColumnIndex("city_code")));
 				city.setProvinceId(provinceId);
 				list.add(city);
-			}while(cursor.moveToNext());
+			}
 		}
 		return list;
 	}
@@ -112,20 +113,16 @@ public class WeatherDB {
 		Cursor cursor = db.query("County", null, "city_id = ?",
 				new String[]{String.valueOf(cityId)},  null, null, null);
 		if(cursor.moveToFirst()){
-			do{
+			while(cursor.moveToNext()){
 				County county = new County();
-				county.setId(cursor.getInt(cursor.getColumnIndex("Id")));
-				county.setCountyName(cursor.getString(cursor.getColumnIndex("city_name")));
-				county.setCountyCode(cursor.getString(cursor.getColumnIndex("city_code")));
+				county.setId(cursor.getInt(cursor.getColumnIndex("id")));
+				county.setCountyName(cursor.getString(cursor.getColumnIndex("county_name")));
+				county.setCountyCode(cursor.getString(cursor.getColumnIndex("county_code")));
 				county.setCityId(cityId);
 				list.add(county);
-			}while(cursor.moveToNext());
-		}
+		}}
 		return list;
 	}
 	
 	
-	
-	
-
 }

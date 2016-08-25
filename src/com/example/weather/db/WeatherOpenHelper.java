@@ -9,8 +9,8 @@ public class WeatherOpenHelper extends SQLiteOpenHelper {
 	//create province table sql
 	public static final String CREATE_PROVINCE ="create table Province ("
 			      +"id integer primary key autoincrement,"
-                  +" province_name text,"
-                  +" province_code text)";
+                  +"province_name text,"
+                  +"province_code text)";
 	
 	//create city table sql
 	public static final String CREATE_CITY = "create table City ("
@@ -29,7 +29,8 @@ public class WeatherOpenHelper extends SQLiteOpenHelper {
 	
 	
 	public WeatherOpenHelper(Context context, String name,
-			CursorFactory factory, int version) {super(context, name, factory, version);}
+			CursorFactory factory, int version) {
+		super(context, name, factory, version);}
 		
 	
 	@Override
