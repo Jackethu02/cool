@@ -1,6 +1,7 @@
 package com.example.weather.activity;
 
 import com.example.weather.R;
+import com.example.weather.service.AutoUpdateService;
 import com.example.weather.util.HttpCallbackListener;
 import com.example.weather.util.HttpUtil;
 import com.example.weather.util.Utility;
@@ -48,6 +49,9 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		//
 		weatherInfoLayout = (LinearLayout)findViewById(R.id.weather_info_layout);
 		cityNameText = (TextView)findViewById(R.id.city_name);
+
+		
+		
 		publishText = (TextView)findViewById(R.id.publish_text);
 		weatherDespText = (TextView)findViewById(R.id.weather_desp);
 		temp1Text = (TextView)findViewById(R.id.temp1);
@@ -169,6 +173,8 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		currentDateText.setText(prefs.getString("current_date", ""));
 		weatherInfoLayout.setVisibility(View.VISIBLE);
 		cityNameText.setVisibility(View.VISIBLE);
+		Intent intent = new Intent(this,AutoUpdateService.class);
+		startService(intent);
 	}
 
 }
